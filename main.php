@@ -15,6 +15,7 @@
     $order1->buy($shop, 12);
     $order1->delivery($shop, $nova_poshta, "lviv");
     var_dump($order1->getTotalPrice());
+    var_dump($rose);
 
     $order2 = new Order($rose);
     $order2->buy($shop, 3);

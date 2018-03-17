@@ -4,7 +4,7 @@
     private $is_bought;
     private $total_price;
 
-    public function __constructor ($flover) {
+    public function __construct($flover) {
       $this->flover = $flover;
       $this->is_bought = false;
       $this->total_price = 0;

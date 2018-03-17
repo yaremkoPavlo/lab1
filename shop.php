@@ -2,7 +2,7 @@
   class Shop {
 
     public function sell ($flover) {
-        return 1;//$flover->getPrice();
+        return $flover->getPrice();
     }
 
     public function delivery ($company, $address) {

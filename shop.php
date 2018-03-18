@@ -10,7 +10,7 @@
     }
 
     public function provide_services ($service) {
-      return $service->price;
+      return $service->getPrice();
     }
   }
 ?>

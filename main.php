@@ -11,14 +11,13 @@
     $shop = new Shop();
     $nova_poshta = new Delivery();
 
-    $order1 = new Order($romashka);
-    $order1->buy($shop, 12);
-    $order1->delivery($shop, $nova_poshta, "lviv");
+    $order1 = new Order($shop, $romashka);
+    $order1->buy(12);
+    $order1->delivery($nova_poshta, "lviv");
     var_dump($order1->getTotalPrice());
-    var_dump($rose);
 
-    $order2 = new Order($rose);
-    $order2->buy($shop, 3);
-    $order2->getTotalPrice();
+    $order2 = new Order($shop, $rose);
+    $order2->buy(3);
+    var_dump($order2->getTotalPrice());
 
 ?>

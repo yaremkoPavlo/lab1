@@ -44,5 +44,10 @@
     public function getTotalPrice() {
       return $this->total_price;
     }
+
+    public function pay($method) {
+      $pay = new Pay($method);
+      return $pay.pay($this->getTotalPrice());
+    }
   }
 ?>

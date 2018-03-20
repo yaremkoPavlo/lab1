@@ -1,53 +1,40 @@
 <?php
-  class Order {
-    private $flover;
-    private $is_bought;
-    private $total_price;
-    private $shop;
+class Order {
+  //private $oreder;
+  private $total_price;
+  private $user;
+  private $goods;
 
-    public function __construct($shop, $flover) {
-      $this->shop = $shop;
-      $this->flover = $flover;
-      $this->is_bought = false;
-      $this->total_price = 0;
-    }
-
-    public function buy($number) {
-       $result = $this->shop->sell($this->flover);
-       $this->is_bought = true;
-       $this->total_price = $this->total_price + $result * $number;
-       return $this->total_price;
-    }
-
-    public function delivery ($company, $address) {
-      if ($this->is_bought) {
-        $result = $this->shop->delivery($company, $address);
-        if (is_int($result)) {
-          $this->is_bought = false;
-          $this->total_price += $result;
-        }
-      } else {
-        echo "you should buy first";
-      }
-      return $this->total_price;
-    }
-
-    public function get_services($service) {
-      $result = $this->shop->provide_services($service);
-      if (is_int($result)) {
-        $this->is_bought = true;
-        $this->total_price += $result;
-      }
-      return $this->total_price;
-    }
-
-    public function getTotalPrice() {
-      return $this->total_price;
-    }
-
-    public function pay($method) {
-      $pay = new Pay($method);
-      return $pay.pay($this->getTotalPrice());
-    }
+  public function __construct($user) {
+    $this->total_price = 0;
+    $this->user = $user;
+    $this->goods = Array();
   }
-?>
+
+  public function chooseGoods($goods) {
+    $this->goods[] = $goods;
+    $total_price = $total_price + $goods->price;
+    return 1;
+  }
+  public function order($order) {
+    //$this->order = $order;
+    return $order;
+  }
+  public function getDiscount($order) {
+    $this->total_price = $this->total_price * $shop->setDiscaunt($this->user,
+                                                                 $this->total_price);
+    return 1;
+  }
+  public function getDeliveryDetails($delivery, $address) {
+    $delivery->setDelivery($address);
+    return 1;
+  }
+  public function getPaymentDetail($order, $payment) {
+    return 1;
+  }
+  public function getConfirmStatus($order) {
+    return 0;
+  }
+
+}
+ ?>

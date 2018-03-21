@@ -3,21 +3,30 @@ class Order {
   //private $oreder;
   private $total_price;
   private $user;
-  private $goods;
+  private $goodsArray;
 
   public function __construct($user) {
     $this->total_price = 0;
     $this->user = $user;
-    $this->goods = Array();
+    $this->goodsArray = Array();
   }
 
-  public function chooseGoods($goods) {
-    $this->goods[] = $goods;
-    $total_price = $total_price + $goods->price;
-    return 1;
+  public function chooseGoods($goods, int $number) {
+    $this->goodsArray[$goods->id] = $number;
+    $total_price = $total_price + $goods->price * $number;
+
+    return $this->goodsArray;
   }
-  public function order($order) {
+
+  public function removeGoods($goods) {
+
+    return 0;
+  }
+
+  public function getReservationForOrder() {
+    //$this->goodsArray
     //$this->order = $order;
+
     return $order;
   }
   public function getDiscount($order) {
@@ -26,7 +35,8 @@ class Order {
     return 1;
   }
   public function getDeliveryDetails($delivery, $address) {
-    $delivery->setDelivery($address);
+    $result = $delivery->setDeliveryDetails($address);
+    $this->total_price += $result;
     return 1;
   }
   public function getPaymentDetail($order, $payment) {

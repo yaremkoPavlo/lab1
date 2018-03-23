@@ -1,31 +1,36 @@
 <?php
-class Shop {
+class Shop
+{
+
+  private $discaunter;
+
+  public function __construct( DiscauntInterface $discaunter) {
+    $this->discaunter = $discaunter;
+  }
 
   public function viewGoods() {
     return 1;
   }
 
   public function setDiscaunt($user, int $t_price) {
-    return $this->calculateDiscaunt($user, $t_price);
+    return $this->$discaunter->calculateDiscaunt($user, $t_price);
   }
 
   public function setDeliveryDetails($deliver, $address) {
     return 1;
   }
 
-  public function setReservation($goods) {
+  public function setReservation(Order $order, array $goods) {
     foreach ($goods as $key => $value) {
-      //$goods[$key]->
-      # code...
-    }
-    //$item->setAvaible()
-  }
+      //$id = $goods[$key];
+      //$val = 0 - $value;
+      //$id->setAvaible(-$value);
 
-  public function setPaymentDetails() {
+    }
     return 1;
   }
 
-  private function calculateDiscaunt($user, int $t_price) {
+  public function setPaymentDetails() {
     return 1;
   }
 }

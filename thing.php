@@ -6,7 +6,13 @@ class Thing {
   private $avaible;
   private $iCharact;
 
-  public function __construct($category, $price, $name, $avaible, $iCharact) {
+  public function __construct (
+                  string $category,
+                  int $price,
+                  string $name,
+                  int $avaible,
+                  iCharact $iCharact)
+  {
     $this->category = $category;
     $this->price = $price;
     $this->name = $name;
@@ -14,6 +20,29 @@ class Thing {
     $this->iCharact = $iCharact;
   }
 
+  public function setAvaible($number) {
+    $this->avaible += $number;
+    return 1;
+  }
   
+  public function getAvaible() {
+    return $this->avaible;
+  }
+  // public function getId() {
+  //   return $this;
+  // }
+  public function getPrice() {
+    return $this->price;
+  }
+
+  public function getInfo() {
+    $infoArray1 = Array("name" => $this->name;
+                       "price" => $this->price;
+                       "category" => $this->category;
+                     );
+    $infoArray2 = $this->$iCharact->getInfo();
+    $infoArray = array_merge($infoArray1, $infoArray2);
+    return $infoArray;
+  }
 }
  ?>

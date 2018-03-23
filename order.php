@@ -1,47 +1,48 @@
 <?php
 class Order {
-  //private $oreder;
   private $total_price;
   private $user;
-  private $goodsArray;
+  private $goodsList;
 
-  public function __construct($user) {
+  public function __construct(User $user) {
     $this->total_price = 0;
     $this->user = $user;
-    $this->goodsArray = Array();
+    $this->goodsList = Array();
   }
 
-  public function chooseGoods($goods, int $number) {
-    $this->goodsArray[$goods->id] = $number;
-    $total_price = $total_price + $goods->price * $number;
+  public function chooseGoods(Thing $goods, int $number) {
+    $this->goodsList[$goods] = Array($goods, $number);
+    $total_price = $total_price + $goods->getPrice() * $number;
 
-    return $this->goodsArray;
+    return $this->goodsList;
   }
 
-  public function removeGoods($goods) {
-
+  public function removeGoods($goods, $number) {
+    //unset($this->goodsList[$goods->id]);
     return 0;
   }
 
   public function getReservationForOrder() {
-    //$this->goodsArray
-    //$this->order = $order;
-
-    return $order;
-  }
-  public function getDiscount($order) {
-    $this->total_price = $this->total_price * $shop->setDiscaunt($this->user,
-                                                                 $this->total_price);
+    $shop->setReservation($this; $this->goodsList);
     return 1;
   }
+
+  public function getDiscount($order) {
+    $discaunt = $shop->setDiscaunt($this->user, $this->total_price);
+    $this->total_price = $this->total_price * (1 - $discaunt);
+    return $discaunt;
+  }
+
   public function getDeliveryDetails($delivery, $address) {
     $result = $delivery->setDeliveryDetails($address);
     $this->total_price += $result;
     return 1;
   }
+
   public function getPaymentDetail($order, $payment) {
     return 1;
   }
+
   public function getConfirmStatus($order) {
     return 0;
   }

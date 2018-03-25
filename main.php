@@ -36,15 +36,22 @@ var_dump($shop->viewGoods());
 echo '<br /><br />';
 //add goods to order
 $order1 = new Order($userVasia);
-$order1->chooseGoods($samstv23, 3);
-$order1->chooseGoods($lgsmart32, 5);
+$order1->chooseGoods($shop, $samstv23, 3);
+$order1->chooseGoods($shop, $lgsmart32, 5);
 //remove item from basket
 $order1->removeGoods($samstv23, 1);
 var_dump($order1->viewBasket());
 echo '<br /><br />';
 //calculate total price
 var_dump($order1->calculateTotalPrice());
+echo '<br /><br />';
 //get discaunt
-$order->getDiscaunt($shop);
+$order1->getDiscaunt($shop);
+//reverve goods
+$order1->getReservationForOrder($shop);
+//get delivery
+$order1->getDeliveryDetails($shop, $novaposhta, $userVasia->getAddress());
+//pay and get confirm
+var_dump($order1->getPaymentDetail($shop, $cashpay, $userVasia));
 
 ?>

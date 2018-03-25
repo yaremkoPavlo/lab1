@@ -17,12 +17,7 @@ class Shop
 
   public function viewGoods():array
   {
-    $arr = [];
-    foreach ($this->goodsList as $key => $value)
-    {
-      $arr[] = $value[0];
-    }
-    return /*$arr;*/$this->goodsList;
+    return $this->goodsList;
   }
 
   public function setDiscauntMetod(DiscauntInterface $discaunter)
@@ -50,22 +45,18 @@ class Shop
     return $delivery->delive($address);
   }
 
-  public function setPaymentDetails(iPay $paymetod, Order $order, User $user)
+  public function setPaymentDetails(iPay $paymetod, float $t_price, User $user)
   {
-    return $paymetod->payOrder($order, $user);
+    return $paymetod->payOrder($t_price, $user);
   }
-/*
-  public function setReservation(Order $order, array $goods)
-  {
-    foreach ($goods as $key => $value) {
-      //$id = $goods[$key];
-      //$val = 0 - $value;
-      //$id->setAvaible(-$value);
 
+  public function setReservation(Order $order, array $goodsList)
+  {
+    foreach ($goodsList as $key => $value) {
+      $this->goodsList[$key][1] -= $value;
     }
-    return 1;
   }
-  */
+  
 }
 
 ?>

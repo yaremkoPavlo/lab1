@@ -2,10 +2,9 @@
 require_once ('ipay.php');
 class CashPay implements iPay
 {
-  public function payOrder (Order $order, User $user):boolean
+  public function payOrder (float $t_price, User $user)
   {
-    $price = $order->getTotalPrice();
-    return isset($price) && isset($user);
+    return true;
   }
 }
 

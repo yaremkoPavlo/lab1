@@ -11,9 +11,12 @@ class Order {
     $this->goodsList    = Array();
   }
 
-  public function chooseGoods(Thing $goods, int $number):array
+  public function chooseGoods(Shop $shop, Thing $goods, int $number):array
   {
-    $this->goodsList[$goods->getArticul()] = Array($goods, $number);
+    if ($number <= $shop->viewGoods[$goods->getArticul()][1])
+    {
+      $this->goodsList[$goods->getArticul()] = Array($goods, $number);
+    }
     return $this->goodsList;
   }
 
@@ -49,21 +52,22 @@ class Order {
 
   public function getTotalPrice():float
   {
-    return $this->total_price();
+    return $this->total_price;
   }
-/*
-  public function getReservationForOrder() {
-    $shop->setReservation($this; $this->goodsList);
+
+  public function getReservationForOrder(Shop $shop)
+  {
+    $shop->setReservation($this, $this->goodsList);
     return 1;
   }
-*/
+
   public function getPaymentDetail (
                                 Shop $shop,
                                 iPay $payment,
                                 User $user
-                                    ):boolean
+                                    )
   {
-    return $shop->setPaymentDetails($payment, $this, $user);
+    return $shop->setPaymentDetails($payment, $this->total_price, $user);
   }
 
   public function getDeliveryDetails(
@@ -82,10 +86,5 @@ class Order {
     return $this->goodsList;
   }
 
-/*
-  public function getConfirmStatus($order) {
-    return 0;
-  }
-*/
 }
  ?>

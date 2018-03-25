@@ -4,48 +4,88 @@ class Order {
   private $user;
   private $goodsList;
 
-  public function __construct(User $user) {
-    $this->total_price = 0;
-    $this->user = $user;
-    $this->goodsList = Array();
+  public function __construct(User $user)
+  {
+    $this->total_price  = 0;
+    $this->user         = $user;
+    $this->goodsList    = Array();
   }
 
-  public function chooseGoods(Thing $goods, int $number) {
-    $this->goodsList[$goods] = Array($goods, $number);
-    $total_price = $total_price + $goods->getPrice() * $number;
-
+  public function chooseGoods(Thing $goods, int $number):array
+  {
+    $this->goodsList[$goods->getArticul()] = Array($goods, $number);
     return $this->goodsList;
   }
 
-  public function removeGoods($goods, $number) {
-    //unset($this->goodsList[$goods->id]);
-    return 0;
+  public function removeGoods(Thing $goods, int $number):array
+  {
+    $key = $goods->getArticul();
+    if ($number < $this->goodsList[$key][1])
+    {
+      $this->goodsList[$key][1] -= $number;
+    }
+    else
+    {
+      unset($this->goodsList[$key]);
+    }
+    return $this->goodsList;
   }
 
-  public function getReservationForOrder() {
-    $shop->setReservation($this; $this->goodsList);
-    return 1;
+  public function calculateTotalPrice():int
+  {
+    foreach ($this->goodsList as $key => $value) {
+      $this->total_price += $this->goodsList[$key][0]->getPrice()
+                          * $this->goodsList[$key][1];
+    }
+    return $this->total_price;
   }
 
-  public function getDiscount($order) {
+  public function getDiscaunt(Shop $shop):float
+  {
     $discaunt = $shop->setDiscaunt($this->user, $this->total_price);
     $this->total_price = $this->total_price * (1 - $discaunt);
     return $discaunt;
   }
 
-  public function getDeliveryDetails($delivery, $address) {
-    $result = $delivery->setDeliveryDetails($address);
+  public function getTotalPrice():float
+  {
+    return $this->total_price();
+  }
+/*
+  public function getReservationForOrder() {
+    $shop->setReservation($this; $this->goodsList);
+    return 1;
+  }
+*/
+  public function getPaymentDetail (
+                                Shop $shop,
+                                iPay $payment,
+                                User $user
+                                    ):boolean
+  {
+    return $shop->setPaymentDetails($payment, $this, $user);
+  }
+
+  public function getDeliveryDetails(
+                                  Shop $shop,
+                                  iDelivery $delivery,
+                                  string $address
+                                    ):int
+  {
+    $result = $shop->setDeliveryDetails($delivery, $address);
     $this->total_price += $result;
-    return 1;
+    return $result;
   }
 
-  public function getPaymentDetail($order, $payment) {
-    return 1;
+  public function viewBasket():array
+  {
+    return $this->goodsList;
   }
 
+/*
   public function getConfirmStatus($order) {
     return 0;
   }
-
+*/
 }
  ?>

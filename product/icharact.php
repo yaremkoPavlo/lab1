@@ -1,6 +1,6 @@
 <?php
 interface iCharact
 {
-  public function getInfo();
+  public function getCharact();
 }
 ?>

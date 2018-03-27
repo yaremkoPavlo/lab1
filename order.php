@@ -11,18 +11,18 @@ class Order {
     $this->goodsList    = Array();
   }
 
-  public function chooseGoods(Shop $shop, Thing $goods, int $number):array
+  public function chooseProduct(Shop $shop, Product $product, int $number):array
   {
-    if ($number <= $shop->viewGoods()[$goods->getArticul()][1])
+    if ($number <= $shop->viewGoods()[$product->getArticul()][1])
     {
-      $this->goodsList[$goods->getArticul()] = Array($goods, $number);
+      $this->goodsList[$product->getArticul()] = Array($product, $number);
     }
     return $this->goodsList;
   }
 
-  public function removeGoods(Thing $goods, int $number):array
+  public function removeGoods(Product $product, int $number):array
   {
-    $key = $goods->getArticul();
+    $key = $product->getArticul();
     if ($number < $this->goodsList[$key][1])
     {
       $this->goodsList[$key][1] -= $number;

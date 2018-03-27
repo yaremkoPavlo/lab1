@@ -21,7 +21,7 @@ class CharactTV implements iCharact
     $this->smart            = $smart;
   }
 
-  public function getInfo():array
+  public function getCharact():array
   {
     $infoArray = Array (
       "producer"         => $this->producer,

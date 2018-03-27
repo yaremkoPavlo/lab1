@@ -1,6 +1,6 @@
 <?php
 
-class Thing {
+class Product {
   private $category;
   private $price;
   private $name;
@@ -45,7 +45,7 @@ class Thing {
                   "category"  => $this->category,
                   "articul"   => $this->articul
                        );
-    $infoArray2 = $this->iCharact->getInfo();
+    $infoArray2 = $this->iCharact->getCharact();
     $infoArray = array_merge($infoArray1, $infoArray2);
     return $infoArray;
   }

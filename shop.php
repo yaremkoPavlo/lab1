@@ -10,7 +10,7 @@ class Shop
     $this->goodsList = Array();
   }
 
-  public function addItem (Thing $item, int $number)
+  public function addItem (Product $item, int $number)
   {
     $this->goodsList[$item->getArticul()] = Array($item, $number);
   }
@@ -30,14 +30,14 @@ class Shop
     return $this->discaunter->calculateDiscaunt($user, $t_price);
   }
 
-  public function setAvaible(Thing $goods, int $number)
+  public function setAvaible(Product $product, int $number)
   {
-    $this->goodsList[$goods->getArticul()][1] += $number;
+    $this->goodsList[$product->getArticul()][1] += $number;
   }
 
-  public function getAvaible(Thing $goods):int
+  public function getAvaible(Product $product):int
   {
-    return $this->goodsList[$goods->getArticul()][1];
+    return $this->goodsList[$product->getArticul()][1];
   }
 
   public function setDeliveryDetails(iDelivery $delivery, string $address):int

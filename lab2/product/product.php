@@ -5,7 +5,7 @@ class Product {
   private $price;
   private $name;
   private $articul;
-  private $iCharact;
+  private $iCharacteristic;
 
   public function __construct (
                   string    $category,
@@ -45,7 +45,7 @@ class Product {
                   "category"  => $this->category,
                   "articul"   => $this->articul
                        );
-    $infoArray2 = $this->iCharact->getCharact();
+    $infoArray2 = $this->iCharacteristic->getCharacteristic();
     $infoArray = array_merge($infoArray1, $infoArray2);
     return $infoArray;
   }

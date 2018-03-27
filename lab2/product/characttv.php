@@ -1,7 +1,7 @@
 <?php
-require_once ('icharact.php');
+require_once('iCharacteristic.php');
 
-class CharactTV implements iCharact
+class CharactTV implements iCharacteristic
 {
   private $producer;
   private $screenSize;
@@ -21,7 +21,7 @@ class CharactTV implements iCharact
     $this->smart            = $smart;
   }
 
-  public function getCharact():array
+  public function getCharacteristic():array
   {
     $infoArray = Array (
       "producer"         => $this->producer,

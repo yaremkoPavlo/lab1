@@ -13,7 +13,7 @@ class Order {
 
   public function chooseGoods(Shop $shop, Thing $goods, int $number):array
   {
-    if ($number <= $shop->viewGoods[$goods->getArticul()][1])
+    if ($number <= $shop->viewGoods()[$goods->getArticul()][1])
     {
       $this->goodsList[$goods->getArticul()] = Array($goods, $number);
     }
@@ -58,7 +58,6 @@ class Order {
   public function getReservationForOrder(Shop $shop)
   {
     $shop->setReservation($this, $this->goodsList);
-    return 1;
   }
 
   public function getPaymentDetail (

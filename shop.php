@@ -50,13 +50,13 @@ class Shop
     return $paymetod->payOrder($t_price, $user);
   }
 
-  public function setReservation(Order $order, array $goodsList)
+  public function setReservation(Order $order, array $reservList)
   {
-    foreach ($goodsList as $key => $value) {
-      $this->goodsList[$key][1] -= $value;
+    foreach ($reservList as $key => $value) {
+      $this->setAvaible($value[0], -$value[1]);
     }
   }
-  
+
 }
 
 ?>

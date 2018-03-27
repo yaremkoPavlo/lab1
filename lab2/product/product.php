@@ -12,14 +12,14 @@ class Product {
                   int       $price,
                   string    $name,
                   string    $articul,
-                  iCharact  $iCharact
+                  iCharacteristic  $iCharacteristic
                               )
   {
     $this->category = $category;
     $this->price    = $price;
     $this->name     = $name;
     $this->articul  = $articul;
-    $this->iCharact = $iCharact;
+    $this->iCharacteristic = $iCharacteristic;
   }
 
   public function getPrice():int

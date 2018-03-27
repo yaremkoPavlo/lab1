@@ -1,7 +1,7 @@
 <?php
 require_once('iCharacteristic.php');
 
-class CharacteristicFlowerRose implements iCharact
+class CharacteristicFlowerRose implements iCharacteristic
 {
     private $color;
     private $roseLength;

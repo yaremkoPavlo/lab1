@@ -9,11 +9,14 @@ class Shop
 {
   private $discaunter;
   private $googdsList;
+  private $paymentMethods;
 
-  public function __construct( DiscauntInterface $discaunter)
+
+  public function __construct( DiscauntInterface $discaunter, iPay $payMethod)
   {
     $this->discaunter = $discaunter;
     $this->goodsList = Array();
+    $this->paymentMethods = Array($payMethod);
   }
 
   public function addItem (Product $item, int $number)
@@ -29,6 +32,16 @@ class Shop
   public function setDiscauntMetod(DiscauntInterface $discaunter)
   {
     $this->discaunter = $discaunter;
+  }
+
+  public function addPaymentMethod(iPay $payMethod):void
+  {
+      $this->paymentMethods[] = $payMethod;
+  }
+
+  public function getPeymentDetails():array
+  {
+      return $this->paymentMethods;
   }
 
   public function setDiscaunt(User $user, int $t_price):float
@@ -51,9 +64,9 @@ class Shop
     return $delivery->delive($address);
   }
 
-  public function setPaymentDetails(iPay $paymetod, float $t_price, User $user)
+  public function setPaymentDetails(int $numberInArray, float $t_price, User $user)
   {
-    return $paymetod->payOrder($t_price, $user);
+    return $this->paymentMethods[$numberInArray]->payOrder($t_price, $user);
   }
 
   public function setReservation(Order $order, array $reservList)

@@ -1,6 +1,6 @@
 <?php
-require_once 'iDecorator.php';
-class Basket implements iDecorator
+require_once 'Decorator.php';
+class Basket implements Decorator
 {
     public function getService()
     {

@@ -22,13 +22,14 @@ $toshtv21c  = new CharacteristicTv("japan", 21, "1378*768", false);
 $toshtv21   = new Product("TV", 1500, "toshiba", "tsh2165", $toshtv21c);
 //create new user
 $userVasia = new User('Vasia Pupkin', 'Zambia, Resbuplic', 'vasi@pupkin.com');
-//create new shop and new type of discaunt
-$trickDiscaunt = new TrickyDiscaunt();
-$shop = new Shop ($trickDiscaunt);
 //create delivery method
 $novaposhta = new Novaposhta();
 //create payment method
 $cashpay = new CashPay();
+//create type of discaunt
+$trickDiscaunt = new TrickyDiscaunt();
+//create new shop
+$shop = new Shop ($trickDiscaunt, $cashpay);
 //add goods
 $shop->addItem($samstv23, 20);
 $shop->addItem($lgsmart32, 10);
@@ -50,8 +51,10 @@ $order1->getDiscaunt($shop);
 $order1->getReservationForOrder($shop);
 //get delivery
 $order1->getDeliveryDetails($shop, $novaposhta, $userVasia->getAddress());
+//view available payment methods
+$shop->getPeymentDetails();
 //pay and get confirm
-var_dump($order1->getPaymentDetail($shop, $cashpay, $userVasia));
+var_dump($order1->setPaymentDetails($shop, 0));
 
 //////////////////////////////////////////////////////
 /*///part two/////

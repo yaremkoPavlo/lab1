@@ -1,6 +1,6 @@
 <?php
-require_once 'iDecorator.php';
-class Ribbon implements iDecorator
+require_once 'Decorator.php';
+class Ribbon implements Decorator
 {
     public function getService()
     {

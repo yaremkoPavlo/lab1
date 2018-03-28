@@ -1,6 +1,6 @@
 <?php
-require_once 'iDecorator.php';
-class Card implements iDecorator
+require_once 'Decorator.php';
+class Card implements Decorator
 {
     public function getService()
     {

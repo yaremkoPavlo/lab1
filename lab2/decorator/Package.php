@@ -1,6 +1,6 @@
 <?php
-require_once 'iDecorator.php';
-class Package implements iDecorator
+require_once 'Decorator.php';
+class Package extends Decorator
 {
     public function getService()
     {

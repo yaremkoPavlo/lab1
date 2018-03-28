@@ -65,13 +65,12 @@ class Order {
     $shop->setReservation($this, $this->goodsList);
   }
 
-  public function getPaymentDetail (
+  public function setPaymentDetails (
                                 Shop $shop,
-                                iPay $payment,
-                                User $user
+                                int $numberInArrayPayment
                                     )
   {
-    return $shop->setPaymentDetails($payment, $this->total_price, $user);
+    return $shop->setPaymentDetails($numberInArrayPayment, $this->total_price, $this->user);
   }
 
   public function getDeliveryDetails(

@@ -1,4 +1,10 @@
 <?php
+namespace models;
+use discaunt\DiscauntInterface;
+use product\Product;
+use delivery\iDelivery;
+use payment\iPay;
+
 class Shop
 {
   private $discaunter;

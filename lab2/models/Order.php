@@ -1,4 +1,9 @@
 <?php
+namespace models;
+use product\Product;
+use delivery\iDelivery;
+use payment\iPay;
+
 class Order {
   private $total_price;
   private $user;

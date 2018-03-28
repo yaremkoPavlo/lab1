@@ -1,5 +1,5 @@
 <?php
-require_once('iCharacteristic.php');
+namespace product;
 
 class CharacteristicFlowerRose implements iCharacteristic
 {

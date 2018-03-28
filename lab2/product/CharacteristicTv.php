@@ -1,7 +1,7 @@
 <?php
-require_once('iCharacteristic.php');
+namespace product;
 
-class CharactTV implements iCharacteristic
+class CharacteristicTv implements iCharacteristic
 {
   private $producer;
   private $screenSize;

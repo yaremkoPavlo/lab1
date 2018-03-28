@@ -1,6 +1,7 @@
 <?php
-require_once ('idelivery.php');
-class NovaPoshta implements iDelivery
+namespace delivery;
+
+class Novaposhta implements iDelivery
 {
   public function delive (string $address):int
   {

@@ -1,5 +1,6 @@
 <?php
-require_once ('discauntinterface.php');
+namespace discaunt;
+use models\User;
 
 class TrickyDiscaunt implements DiscauntInterface
 {

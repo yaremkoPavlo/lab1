@@ -9,5 +9,3 @@ class CashPay implements iPay
     return true;
   }
 }
-
-?>

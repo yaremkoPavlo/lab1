@@ -10,4 +10,3 @@ class Novaposhta implements iDelivery
     return $price;
   }
 }
-?>

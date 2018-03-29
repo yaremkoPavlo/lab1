@@ -2,7 +2,6 @@
 namespace models;
 use product\Product;
 use delivery\iDelivery;
-use payment\iPay;
 
 class Order {
   private $total_price;
@@ -48,9 +47,9 @@ class Order {
     return $this->total_price;
   }
 
-  public function getDiscaunt(Shop $shop):float
+  public function getDiscount(Shop $shop):float
   {
-    $discaunt = $shop->setDiscaunt($this->user, $this->total_price);
+    $discaunt = $shop->setDiscount($this->user, $this->total_price);
     $this->total_price = $this->total_price * (1 - $discaunt);
     return $discaunt;
   }
@@ -62,7 +61,7 @@ class Order {
 
   public function getReservationForOrder(Shop $shop)
   {
-    $shop->setReservation($this, $this->goodsList);
+    $shop->setReservation($this->goodsList);
   }
 
   public function setPaymentDetails (
@@ -90,4 +89,3 @@ class Order {
   }
 
 }
- ?>

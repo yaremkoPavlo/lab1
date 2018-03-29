@@ -1,27 +1,28 @@
 <?php
 namespace models;
-use discaunt\DiscauntInterface;
+use discount\DiscountInterface;
 use product\Product;
 use delivery\iDelivery;
 use payment\iPay;
 
 class Shop
 {
-  private $discaunter;
-  private $googdsList;
+  private $discounter;
+  private $goodsList;
   private $paymentMethods;
 
 
-  public function __construct( DiscauntInterface $discaunter, iPay $payMethod)
+  public function __construct(DiscountInterface $discounter, iPay $payMethod)
   {
-    $this->discaunter = $discaunter;
+    $this->discounter = $discounter;
     $this->goodsList = Array();
     $this->paymentMethods = Array($payMethod);
   }
 
-  public function addItem (Product $item, int $number)
+  public function addItem (Product $item, int $number):Shop
   {
     $this->goodsList[$item->getArticul()] = Array($item, $number);
+    return $this;
   }
 
   public function viewGoods():array
@@ -29,9 +30,9 @@ class Shop
     return $this->goodsList;
   }
 
-  public function setDiscauntMetod(DiscauntInterface $discaunter)
+  public function setDiscauntMetod(DiscountInterface $discounter)
   {
-    $this->discaunter = $discaunter;
+    $this->discounter = $discounter;
   }
 
   public function addPaymentMethod(iPay $payMethod):void
@@ -44,9 +45,9 @@ class Shop
       return $this->paymentMethods;
   }
 
-  public function setDiscaunt(User $user, int $t_price):float
+  public function setDiscount(User $user, int $t_price):float
   {
-    return $this->discaunter->calculateDiscaunt($user, $t_price);
+    return $this->discounter->calculateDiscount($user, $t_price);
   }
 
   public function setAvaible(Product $product, int $number)
@@ -69,7 +70,7 @@ class Shop
     return $this->paymentMethods[$numberInArray]->payOrder($t_price, $user);
   }
 
-  public function setReservation(Order $order, array $reservList)
+  public function setReservation(array $reservList)
   {
     foreach ($reservList as $key => $value) {
       $this->setAvaible($value[0], -$value[1]);
@@ -77,5 +78,3 @@ class Shop
   }
 
 }
-
-?>

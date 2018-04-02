@@ -14,6 +14,13 @@ use delivery\Novaposhta;
 use payment\Cashpay;
 use product\CharacteristicFlowerChamomile;
 use product\CharacteristicFlowerRose;
+use services\Basket;
+use services\Card;
+use services\Package;
+use services\Ribbon;
+use services\decorators\AddService;
+use services\decorators\BigBasket;
+
 
 //create new things
 $samstv23c  = new CharacteristicTv("china", 23, "1920*1080", false);
@@ -98,5 +105,43 @@ $flowerShop = new Shop($trickDiscaunt, $cashpay);
 $flowerShop->addItem($redRose40,20)->addItem($redRose80,80)->addItem($whiteRose30,30)->addItem($whiteRose50,20)
            ->addItem($chamomile,120)->addItem($yellowChamomile,50);
 
+//view products
+$flowerShop->viewGoods();
+
+//make order
+$order1 = new Order($userVasia);
+
+//add products to order
+$order1->chooseProduct($flowerShop,$redRose40, 12);
+
+//calculate sum
+$order1->calculateTotalPrice();
+
+//create service
+$basketService = new Basket();
+$cardService = new Card();
+$bigBasket = new BigBasket($basketService);
+//$addService = new AddService($cardService);
+//$bigBasket->getService();
+//$addService->getService();
+
+
+//add service to order
+$order1->getService($bigBasket);
+
+//get discaunt
+$order1->getDiscount($flowerShop);
+
+//reserve goods
+$order1->getReservationForOrder($flowerShop);
+
+//get delivery
+$order1->getDeliveryDetails($flowerShop, $novaposhta, $userVasia->getAddress());
+
+//view available payment methods
+$shop->getPeymentDetails();
+
+//pay and get confirm
+$order1->setPaymentDetails($flowerShop,0);
 
 echo 'end';

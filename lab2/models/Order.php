@@ -2,6 +2,7 @@
 namespace models;
 use product\Product;
 use delivery\iDelivery;
+use services\ServiceInterface;
 
 class Order {
   private $total_price;
@@ -88,4 +89,8 @@ class Order {
     return $this->goodsList;
   }
 
+  public function getService(ServiceInterface $service)
+  {
+      $this->total_price += $service->getService();
+  }
 }

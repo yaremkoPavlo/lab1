@@ -7,7 +7,7 @@ class Task
     private $status;
     public function __construct()
     {
-        new Opened($this);
+        $this->status = '';
     }
 
     public function setStatus(String $status)

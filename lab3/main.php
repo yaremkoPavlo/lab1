@@ -15,11 +15,14 @@ use status\Task;
 use status\Opened;
 
 $task1 = new Task();
-echo $task1->getStatus();
-
 $doTaskStatus = new Opened($task1);
+echo $task1->getStatus();
+echo '<br />';
 $doTaskStatus = $doTaskStatus->inProgress();
-
+$doTaskStatus = $doTaskStatus->resolved();
+echo $task1->getStatus();
+echo "<br />";
+$doTaskStatus = $doTaskStatus->verified();
 $doTaskStatus = $doTaskStatus->close();
 echo $task1->getStatus();
 

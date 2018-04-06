@@ -20,6 +20,8 @@ echo $task1->getStatus();
 echo '<br />';
 $doTaskStatus = $doTaskStatus->inProgress();
 $doTaskStatus = $doTaskStatus->resolved();
+$doTaskStatus = $doTaskStatus->opened();
+echo "<br />";
 echo $task1->getStatus();
 echo "<br />";
 $doTaskStatus = $doTaskStatus->verified();
